@@ -9,7 +9,7 @@
   /* ---------------------------------------------------------
      >> ÚNICO LUGAR QUE DEBES EDITAR PARA EL FORMULARIO <<
      --------------------------------------------------------- */
-  const FORM_URL = 'https://forms.gle/xxxxxxxxxxxxxxxx';
+  const FORM_URL = 'https://forms.gle/2w7oSmajrmrYeEZZ7';
 
   /* ---------- Datos de las jornadas ---------- */
   const MESES = [
