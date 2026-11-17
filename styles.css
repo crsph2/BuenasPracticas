@@ -181,6 +181,7 @@ img { max-width: 100%; display: block; }
   border-bottom: 3px solid transparent;
 }
 .nav-lista a:hover { border-bottom-color: var(--azul); }
+.nav-lista a[aria-current="page"] { border-bottom-color: var(--azul); }
 
 .nav-cta {
   background: var(--azul);
