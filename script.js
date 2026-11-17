@@ -1,6 +1,6 @@
 /* =========================================================
    Jornada de Buenas Prácticas · Inclusión Educativa · UDP
-   Calendario interactivo, pestañas de programa y enlaces
+   Navegación por vistas, calendario interactivo y pestañas
    ========================================================= */
 
 (function () {
@@ -8,7 +8,6 @@
 
   /* ---------------------------------------------------------
      >> ÚNICO LUGAR QUE DEBES EDITAR PARA EL FORMULARIO <<
-     Reemplaza la URL cuando tengas el formulario de Google.
      --------------------------------------------------------- */
   const FORM_URL = 'https://forms.gle/xxxxxxxxxxxxxxxx';
 
@@ -19,9 +18,9 @@
   ];
 
   const JORNADAS = {
-    '2026-11-18': {
-      fechaCorta: '18 de noviembre de 2026',
-      fechaLarga: 'Miércoles 18 de noviembre de 2026',
+    '2026-12-08': {
+      fechaCorta: '8 de diciembre de 2026',
+      fechaLarga: 'Martes 8 de diciembre de 2026',
       etiqueta: 'Jornada 1 · Tarde',
       titulo: 'Enseñar y evaluar para la diversidad',
       horario: '14:00 – 18:00',
@@ -45,9 +44,9 @@
         }
       ]
     },
-    '2026-11-19': {
-      fechaCorta: '19 de noviembre de 2026',
-      fechaLarga: 'Jueves 19 de noviembre de 2026',
+    '2026-12-09': {
+      fechaCorta: '9 de diciembre de 2026',
+      fechaLarga: 'Miércoles 9 de diciembre de 2026',
       etiqueta: 'Jornada 2 · Mañana',
       titulo: 'Repensar los planes de estudio y diseñar asignaturas inclusivas',
       horario: '09:00 – 13:00',
@@ -74,7 +73,7 @@
   };
 
   /* ---------- Estado del calendario ---------- */
-  const estado = { anio: 2026, mes: 11, seleccion: null }; // mes 1-12
+  const estado = { anio: 2026, mes: 12, seleccion: null };
 
   const elTitulo = document.getElementById('calTitulo');
   const elGrid = document.getElementById('calGrid');
@@ -256,25 +255,117 @@
     });
   });
 
-  /* ---------- Enlaces al formulario ---------- */
-  document.querySelectorAll('[data-form]').forEach(function (enlace) {
-    enlace.href = FORM_URL;
+  /* ---------- Navegación entre vistas ---------- */
+  const navLinks = document.querySelectorAll('a[data-vista]');
+  const vistas = document.querySelectorAll('.vista');
+
+  function mostrarVista(id, scrollToId = null) {
+    // Mostrar/ocultar
+    vistas.forEach(function (v) {
+      if (v.id === 'vista-' + id) {
+        v.hidden = false;
+      } else {
+        v.hidden = true;
+      }
+    });
+
+    // Actualizar aria-current
+    navLinks.forEach(function (link) {
+      if (link.dataset.vista === id) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    // Foco y scroll
+    if (scrollToId) {
+      const el = document.getElementById(scrollToId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });
+      }
+    } else {
+      const targetVista = document.getElementById('vista-' + id);
+      if (targetVista) {
+        const titulo = targetVista.querySelector('h1, h2');
+        if (titulo) {
+          titulo.setAttribute('tabindex', '-1');
+          titulo.focus({ preventScroll: true });
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Clics en enlaces
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    // Cambio de vista principal
+    if (link.dataset.vista) {
+      e.preventDefault();
+      const id = link.dataset.vista;
+      history.pushState({ vista: id }, '', '#' + id);
+      mostrarVista(id);
+      return;
+    }
+
+    // Enlaces a mesas específicas
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#mesa-')) {
+      e.preventDefault();
+      const mesaId = href.substring(1);
+      history.pushState({ vista: 'mesas', scrollTo: mesaId }, '', '#mesas');
+      mostrarVista('mesas', mesaId);
+    }
   });
 
-  /* ---------- Fechas dinámicas en el HTML ---------- */
-  const MAPA_FECHAS = { j1: '2026-11-18', j2: '2026-11-19' };
-
-  document.querySelectorAll('[data-fecha]').forEach(function (el) {
-    const k = MAPA_FECHAS[el.getAttribute('data-fecha')];
-    if (k && JORNADAS[k]) el.textContent = JORNADAS[k].fechaCorta;
+  // Navegación hacia atrás/adelante
+  window.addEventListener('popstate', function (e) {
+    const state = e.state;
+    if (state && state.vista) {
+      mostrarVista(state.vista, state.scrollTo || null);
+    } else {
+      const hash = window.location.hash.replace('#', '');
+      const vistasPosibles = ['inicio', 'calendario', 'programa', 'mesas', 'expositores', 'inscripcion'];
+      const defaultVista = vistasPosibles.includes(hash) ? hash : 'inicio';
+      mostrarVista(defaultVista);
+    }
   });
 
-  document.querySelectorAll('[data-fecha-larga]').forEach(function (el) {
-    const k = MAPA_FECHAS[el.getAttribute('data-fecha-larga')];
-    if (k && JORNADAS[k]) el.textContent = JORNADAS[k].fechaLarga;
-  });
+  /* ---------- Inicialización ---------- */
+  function init() {
+    const hash = window.location.hash.replace('#', '');
+    const vistasPosibles = ['inicio', 'calendario', 'programa', 'mesas', 'expositores', 'inscripcion'];
+    const initialVista = vistasPosibles.includes(hash) ? hash : 'inicio';
 
-  /* ---------- Inicio ---------- */
-  renderCalendario();
-  renderPanel();
+    // Configurar enlaces del formulario
+    document.querySelectorAll('[data-form]').forEach(function (enlace) {
+      enlace.href = FORM_URL;
+    });
+
+    // Actualizar fechas dinámicas
+    const MAPA_FECHAS = { j1: '2026-12-08', j2: '2026-12-09' };
+
+    document.querySelectorAll('[data-fecha]').forEach(function (el) {
+      const k = MAPA_FECHAS[el.getAttribute('data-fecha')];
+      if (k && JORNADAS[k]) el.textContent = JORNADAS[k].fechaCorta;
+    });
+
+    document.querySelectorAll('[data-fecha-larga]').forEach(function (el) {
+      const k = MAPA_FECHAS[el.getAttribute('data-fecha-larga')];
+      if (k && JORNADAS[k]) el.textContent = JORNADAS[k].fechaLarga;
+    });
+
+    renderCalendario();
+    renderPanel();
+    mostrarVista(initialVista);
+    history.replaceState({ vista: initialVista }, '', '#' + initialVista);
+  }
+
+  init();
+
 })();
