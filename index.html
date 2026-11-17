@@ -20,17 +20,17 @@
 
 <header class="sitio-header">
   <div class="contenedor header-inner">
-    <a class="marca" href="#inicio">
+    <a class="marca" href="#vista-inicio" data-vista="inicio">
       <span class="marca-udp">udp</span>
       <span class="marca-texto">Jornada de Buenas Prácticas<br><span>Inclusión Educativa</span></span>
     </a>
     <nav aria-label="Navegación principal">
       <ul class="nav-lista">
-        <li><a href="#calendario">Calendario</a></li>
-        <li><a href="#programa">Programa</a></li>
-        <li><a href="#mesas">Mesas</a></li>
-        <li><a href="#expositores">Expositores</a></li>
-        <li><a class="nav-cta" href="#inscripcion">Inscríbete</a></li>
+        <li><a href="#vista-calendario" data-vista="calendario">Calendario</a></li>
+        <li><a href="#vista-programa" data-vista="programa">Programa</a></li>
+        <li><a href="#vista-mesas" data-vista="mesas">Mesas</a></li>
+        <li><a href="#vista-expositores" data-vista="expositores">Expositores</a></li>
+        <li><a class="nav-cta" href="#vista-inscripcion" data-vista="inscripcion">Inscríbete</a></li>
       </ul>
     </nav>
   </div>
@@ -38,8 +38,8 @@
 
 <main id="contenido">
 
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="inicio" aria-labelledby="titulo-principal">
+  <!-- ================= VISTA INICIO ================= -->
+  <section class="hero vista" id="vista-inicio" aria-labelledby="titulo-principal">
     <div class="contenedor hero-grid">
       <div>
         <p class="eyebrow">Vicerrectoría Académica · Pregrado</p>
@@ -50,8 +50,8 @@
           académicos de la Universidad Diego Portales.
         </p>
         <div class="hero-acciones">
-          <a class="btn btn-primario btn-grande" href="https://forms.gle/xxxxxxxxxxxxxxxx" data-form target="_blank" rel="noopener">Inscríbete aquí</a>
-          <a class="btn btn-secundario" href="#programa">Ver programa</a>
+          <a class="btn btn-primario btn-grande" href="#vista-inscripcion" data-vista="inscripcion">Inscríbete aquí</a>
+          <a class="btn btn-secundario" href="#vista-programa" data-vista="programa">Ver programa</a>
         </div>
       </div>
 
@@ -63,8 +63,8 @@
             <div>
               <p class="dato-titulo">Fechas</p>
               <p class="dato-valor">
-                <span data-fecha="j1">18 de noviembre de 2026</span><br>
-                <span data-fecha="j2">19 de noviembre de 2026</span>
+                <span data-fecha="j1">8 de diciembre de 2026</span><br>
+                <span data-fecha="j2">9 de diciembre de 2026</span>
               </p>
             </div>
           </li>
@@ -90,13 +90,13 @@
             </div>
           </li>
         </ul>
-        <a class="btn btn-primario" href="https://forms.gle/xxxxxxxxxxxxxxxx" data-form target="_blank" rel="noopener">Inscríbete aquí</a>
+        <a class="btn btn-primario" href="#vista-inscripcion" data-vista="inscripcion">Inscríbete aquí</a>
       </aside>
     </div>
   </section>
 
-  <!-- ================= CALENDARIO ================= -->
-  <section class="seccion seccion--blanca" id="calendario" aria-labelledby="titulo-calendario">
+  <!-- ================= VISTA CALENDARIO ================= -->
+  <section class="seccion seccion--blanca vista" id="vista-calendario" aria-labelledby="titulo-calendario" hidden>
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="seccion-eyebrow">Agenda</p>
@@ -111,7 +111,7 @@
         <div class="calendario">
           <div class="cal-cabecera">
             <button type="button" class="cal-nav" id="mesAnterior" aria-label="Mes anterior">&#8249;</button>
-            <h3 class="cal-titulo" id="calTitulo" aria-live="polite">Noviembre 2026</h3>
+            <h3 class="cal-titulo" id="calTitulo" aria-live="polite">Diciembre 2026</h3>
             <button type="button" class="cal-nav" id="mesSiguiente" aria-label="Mes siguiente">&#8250;</button>
           </div>
 
@@ -126,7 +126,7 @@
 
           <noscript>
             <p class="cal-nota">
-              Este calendario necesita JavaScript. Las jornadas se realizan el 18 y 19 de noviembre de 2026.
+              Este calendario necesita JavaScript. Las jornadas se realizan el 8 y 9 de diciembre de 2026.
             </p>
           </noscript>
         </div>
@@ -141,8 +141,8 @@
     </div>
   </section>
 
-  <!-- ================= PROGRAMA ================= -->
-  <section class="seccion" id="programa" aria-labelledby="titulo-programa">
+  <!-- ================= VISTA PROGRAMA ================= -->
+  <section class="seccion vista" id="vista-programa" aria-labelledby="titulo-programa" hidden>
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="seccion-eyebrow">Programa</p>
@@ -164,7 +164,7 @@
 
       <div class="tabpanel" role="tabpanel" id="panel-j1" aria-labelledby="tab-j1" tabindex="0">
         <p class="tabpanel-fecha">
-          <span data-fecha-larga="j1">Miércoles 18 de noviembre de 2026</span> · 14:00 – 18:00
+          <span data-fecha-larga="j1">Martes 8 de diciembre de 2026</span> · 14:00 – 18:00
         </p>
         <ol class="linea-tiempo">
           <li class="lt-item">
@@ -232,7 +232,7 @@
 
       <div class="tabpanel" role="tabpanel" id="panel-j2" aria-labelledby="tab-j2" tabindex="0" hidden>
         <p class="tabpanel-fecha">
-          <span data-fecha-larga="j2">Jueves 19 de noviembre de 2026</span> · 09:00 – 13:00
+          <span data-fecha-larga="j2">Miércoles 9 de diciembre de 2026</span> · 09:00 – 13:00
         </p>
         <ol class="linea-tiempo">
           <li class="lt-item">
@@ -293,8 +293,8 @@
     </div>
   </section>
 
-  <!-- ================= MESAS ================= -->
-  <section class="seccion seccion--blanca" id="mesas" aria-labelledby="titulo-mesas">
+  <!-- ================= VISTA MESAS ================= -->
+  <section class="seccion seccion--blanca vista" id="vista-mesas" aria-labelledby="titulo-mesas" hidden>
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="seccion-eyebrow">Mesas de trabajo</p>
@@ -437,8 +437,8 @@
     </div>
   </section>
 
-  <!-- ================= EXPOSITORES ================= -->
-  <section class="seccion" id="expositores" aria-labelledby="titulo-expositores">
+  <!-- ================= VISTA EXPOSITORES ================= -->
+  <section class="seccion vista" id="vista-expositores" aria-labelledby="titulo-expositores" hidden>
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="seccion-eyebrow">Conferencias</p>
@@ -483,8 +483,8 @@
     </div>
   </section>
 
-  <!-- ================= INSCRIPCIÓN ================= -->
-  <section class="seccion-inscripcion" id="inscripcion" aria-labelledby="titulo-inscripcion">
+  <!-- ================= VISTA INSCRIPCIÓN ================= -->
+  <section class="seccion-inscripcion vista" id="vista-inscripcion" aria-labelledby="titulo-inscripcion" hidden>
     <div class="contenedor">
       <div class="inscripcion-inner">
         <h2 id="titulo-inscripcion">Inscríbete en la jornada</h2>
@@ -492,6 +492,7 @@
           Completa el formulario para reservar tu cupo en las mesas de trabajo. La actividad está
           dirigida a docentes, directivos y equipos académicos de la UDP.
         </p>
+        <!-- Reemplaza este enlace por el formulario de Google definitivo -->
         <a class="btn btn-primario btn-grande" href="https://forms.gle/xxxxxxxxxxxxxxxx" data-form target="_blank" rel="noopener">Inscríbete aquí</a>
         <p class="inscripcion-nota">
           El formulario incluye un apartado para indicar requerimientos de accesibilidad
