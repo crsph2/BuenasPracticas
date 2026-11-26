@@ -1,6 +1,7 @@
 /* =========================================================
-   Encuentro de Buenas Prácticas · Formación de Pregrado · UDP
-   Paleta basada en los bloques de color del documento institucional
+   Jornada de Buenas Prácticas · Inclusión Educativa · UDP
+   Paleta basada en los bloques de color del documento
+   institucional v9_BuenasPracticas_VRA
    ========================================================= */
 
 /* ---------- 1. Tokens de diseño ---------- */
@@ -559,7 +560,6 @@ img { max-width: 100%; display: block; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem 1.5rem;
 }
 .cal-acciones-nota {
@@ -635,12 +635,6 @@ img { max-width: 100%; display: block; }
   color: var(--tinta-suave);
   font-size: 1rem;
 }
-.lt-nota {
-  margin: .5rem 0 0;
-  font-size: .875rem;
-  color: var(--vino);
-  font-style: italic;
-}
 
 .lt-item--destacado {
   background: var(--azul-suave);
@@ -651,17 +645,6 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- 11. Mesas ---------- */
-.dia-titulo {
-  grid-column: 1 / -1;
-  font-size: 1.375rem;
-  color: var(--azul);
-  margin-top: 2rem;
-  margin-bottom: 0;
-  padding-bottom: .5rem;
-  border-bottom: 3px solid var(--azul-suave);
-}
-.dia-titulo:first-of-type { margin-top: 0; }
-
 .mesas-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -677,18 +660,10 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--sombra);
   scroll-margin-top: 100px;
 }
-.mesas-grid .mesa:nth-of-type(1) { border-top-color: var(--azul); }
-.mesas-grid .mesa:nth-of-type(2) { border-top-color: var(--oliva); }
-.mesas-grid .mesa:nth-of-type(3) { border-top-color: var(--marron); }
-.mesas-grid .mesa:nth-of-type(4) { border-top-color: var(--naranja); }
-.mesas-grid .mesa:nth-of-type(5) { border-top-color: var(--vino); }
-.mesas-grid .mesa:nth-of-type(6) { border-top-color: var(--celeste); }
-.mesas-grid .mesa:nth-of-type(7) { border-top-color: var(--azul); }
-.mesas-grid .mesa:nth-of-type(8) { border-top-color: var(--oliva); }
-.mesas-grid .mesa:nth-of-type(9) { border-top-color: var(--marron); }
-.mesas-grid .mesa:nth-of-type(10) { border-top-color: var(--naranja); }
-.mesas-grid .mesa:nth-of-type(11) { border-top-color: var(--vino); }
-.mesas-grid .mesa:nth-of-type(12) { border-top-color: var(--celeste); }
+.mesas-grid .mesa:nth-child(1) { border-top-color: var(--azul); }
+.mesas-grid .mesa:nth-child(2) { border-top-color: var(--oliva); }
+.mesas-grid .mesa:nth-child(3) { border-top-color: var(--marron); }
+.mesas-grid .mesa:nth-child(4) { border-top-color: var(--naranja); }
 
 .mesa-num {
   margin: 0;
