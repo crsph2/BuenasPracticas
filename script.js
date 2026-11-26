@@ -13,32 +13,6 @@
   ];
 
   const JORNADAS = {
-    '2026-12-09': {
-      fechaCorta: '9 de diciembre de 2026',
-      fechaLarga: 'Miércoles 9 de diciembre de 2026',
-      etiqueta: 'Jornada 1 · Conferencia',
-      titulo: 'Charla: Docencia inclusiva',
-      horario: '14:30 – 15:50',
-      conferencia: {
-        hora: '14:30 – 15:50',
-        titulo: 'Docencia inclusiva',
-        persona: 'Pablo Rodríguez · UAM (Zoom)'
-      },
-      mesas: []
-    },
-    '2026-12-10': {
-      fechaCorta: '10 de diciembre de 2026',
-      fechaLarga: 'Jueves 10 de diciembre de 2026',
-      etiqueta: 'Jornada 2 · Conversatorio',
-      titulo: 'Conversatorio: Diseño formativo inclusivo',
-      horario: '09:30 – 11:00',
-      conferencia: {
-        hora: '09:30 – 11:00',
-        titulo: 'Diseño formativo inclusivo',
-        persona: 'Cristina Petreñas y Clara Sansó · UdL (Zoom)'
-      },
-      mesas: []
-    },
     '2026-12-16': {
       fechaCorta: '16 de diciembre de 2026',
       fechaLarga: 'Miércoles 16 de diciembre de 2026',
@@ -171,12 +145,11 @@
     
     if (j.mesas.length > 0) {
       mesasHTML = j.mesas.map(function (m) {
-        return '<li><a href="' + m.ancla + '" data-vista="mesas">' + m.etiqueta + '. ' + m.titulo + '</a> — ' + m.hora + '</li>';
+        return '<li><a href="' + m.ancla + '" data-vista="programa">' + m.etiqueta + '. ' + m.titulo + '</a> — ' + m.hora + '</li>';
       }).join('');
       mesasHTML = '<p class="panel-subtitulo">Mesas de trabajo (requieren inscripción)</p><ul class="panel-lista">' + mesasHTML + '</ul>';
     }
 
-    // Solo mostramos botón de inscripción si hay mesas (días 16 y 17)
     const btnInscripcion = j.mesas.length > 0 
       ? '<a class="btn btn-primario" href="' + FORM_URL + '" target="_blank" rel="noopener">Inscríbete en las mesas</a>' 
       : '';
@@ -211,36 +184,6 @@
     });
   }
 
-  /* Pestañas */
-  const tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-
-  function activarTab(tab) {
-    tabs.forEach(function (t) {
-      const panel = document.getElementById(t.getAttribute('aria-controls'));
-      const activo = (t === tab);
-      t.setAttribute('aria-selected', activo ? 'true' : 'false');
-      t.tabIndex = activo ? 0 : -1;
-      if (panel) panel.hidden = !activo;
-    });
-  }
-
-  tabs.forEach(function (tab, indice) {
-    tab.addEventListener('click', function () { activarTab(tab); });
-    tab.addEventListener('keydown', function (evento) {
-      let destino = null;
-      if (evento.key === 'ArrowRight') destino = tabs[(indice + 1) % tabs.length];
-      else if (evento.key === 'ArrowLeft') destino = tabs[(indice - 1 + tabs.length) % tabs.length];
-      else if (evento.key === 'Home') destino = tabs[0];
-      else if (evento.key === 'End') destino = tabs[tabs.length - 1];
-
-      if (destino) {
-        evento.preventDefault();
-        destino.focus();
-        activarTab(destino);
-      }
-    });
-  });
-
   /* Navegación */
   const navLinks = document.querySelectorAll('a[data-vista]');
   const vistas = document.querySelectorAll('.vista');
@@ -261,8 +204,6 @@
         el.scrollIntoView({ behavior: 'smooth' });
         el.setAttribute('tabindex', '-1');
         el.focus({ preventScroll: true });
-        // Abrir el details si estaba cerrado
-        if (el.tagName.toLowerCase() === 'details') el.open = true;
       }
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -293,8 +234,8 @@
     if (href && href.startsWith('#mesa-')) {
       e.preventDefault();
       const mesaId = href.substring(1);
-      history.pushState({ vista: 'mesas', scrollTo: mesaId }, '', '#mesas');
-      mostrarVista('mesas', mesaId);
+      history.pushState({ vista: 'programa', scrollTo: mesaId }, '', '#programa');
+      mostrarVista('programa', mesaId);
     }
   });
 
@@ -303,52 +244,15 @@
       mostrarVista(e.state.vista, e.state.scrollTo || null);
     } else {
       const hash = window.location.hash.replace('#', '');
-      const vistasPosibles = ['inicio', 'calendario', 'programa', 'mesas', 'expositores', 'inscripcion'];
+      const vistasPosibles = ['inicio', 'calendario', 'programa', 'inscripcion'];
       mostrarVista(vistasPosibles.includes(hash) ? hash : 'inicio');
     }
   });
 
-  /* ICS */
-  const btnICS = document.getElementById('btnDescargarICS');
-  if (btnICS) {
-    btnICS.addEventListener('click', function() {
-      const eventos = [
-        { inicio: '20261209T143000', fin: '20261209T155000', titulo: 'Charla: Docencia inclusiva (Pablo Rodríguez)', descripcion: 'Actividad vía Zoom.', lugar: 'Vía Zoom' },
-        { inicio: '20261210T093000', fin: '20261210T110000', titulo: 'Conversatorio: Diseño formativo inclusivo (UdL)', descripcion: 'Actividad vía Zoom.', lugar: 'Vía Zoom' },
-        { inicio: '20261216T093000', fin: '20261216T172000', titulo: 'Inauguración, experiencias y Mesas 1-6', descripcion: 'Encuentro de Buenas Prácticas UDP.', lugar: 'Vértice y Sala CREA' },
-        { inicio: '20261217T100000', fin: '20261217T143000', titulo: 'Mesas 7-12 y Presentación del libro', descripcion: 'Encuentro de Buenas Prácticas UDP.', lugar: 'Vértice y Sala CREA' }
-      ];
-
-      let icsContent = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//UDP//Encuentro Buenas Practicas//ES', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
-      eventos.forEach(function(ev) {
-        icsContent.push('BEGIN:VEVENT');
-        icsContent.push('UID:' + Date.now() + Math.random().toString(36).substring(2) + '@udp.cl');
-        icsContent.push('DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z');
-        icsContent.push('DTSTART:' + ev.inicio);
-        icsContent.push('DTEND:' + ev.fin);
-        icsContent.push('SUMMARY:' + ev.titulo);
-        icsContent.push('DESCRIPTION:' + ev.descripcion);
-        icsContent.push('LOCATION:' + ev.lugar);
-        icsContent.push('END:VEVENT');
-      });
-      icsContent.push('END:VCALENDAR');
-
-      const blob = new Blob([icsContent.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Encuentro_Buenas_Practicas_UDP.ics';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    });
-  }
-
   /* Init */
   function init() {
     const hash = window.location.hash.replace('#', '');
-    const vistasPosibles = ['inicio', 'calendario', 'programa', 'mesas', 'expositores', 'inscripcion'];
+    const vistasPosibles = ['inicio', 'calendario', 'programa', 'inscripcion'];
     const initialVista = vistasPosibles.includes(hash) ? hash : 'inicio';
 
     document.querySelectorAll('[data-form]').forEach(function (enlace) {
