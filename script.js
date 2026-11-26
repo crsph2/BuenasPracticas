@@ -22,15 +22,15 @@
       conferencia: {
         hora: '09:30 – 11:20',
         titulo: 'Inauguración y presentación de experiencias: Docencia en primera persona',
-        persona: 'Docentes destacados UDP'
+        persona: 'Sala por definir'
       },
       mesas: [
-        { etiqueta: 'Mesa 1', titulo: 'Metodologías activas y Tecnologías emergentes', sala: 'Vértice/CREA', ancla: '#mesa-1', hora: '14:30 – 15:50' },
-        { etiqueta: 'Mesa 2', titulo: 'Habilidades profesionales', sala: 'Vértice/CREA', ancla: '#mesa-2', hora: '14:30 – 15:50' },
-        { etiqueta: 'Mesa 3', titulo: 'Evaluar para la diversidad', sala: 'Vértice/CREA', ancla: '#mesa-3', hora: '14:30 – 15:50' },
-        { etiqueta: 'Mesa 4', titulo: 'Inserción y apoyo académico', sala: 'Vértice/CREA', ancla: '#mesa-4', hora: '16:00 – 17:20' },
-        { etiqueta: 'Mesa 5', titulo: 'Evaluación para el aprendizaje', sala: 'Vértice/CREA', ancla: '#mesa-5', hora: '16:00 – 17:20' },
-        { etiqueta: 'Mesa 6', titulo: 'Consideraciones inclusivas para la práctica docente', sala: 'Vértice/CREA', ancla: '#mesa-6', hora: '16:00 – 17:20' }
+        { etiqueta: 'Mesa 1', titulo: 'Metodologías activas y Tecnologías emergentes', sala: 'Sala por definir', ancla: '#mesa-1', hora: '14:30 – 15:50' },
+        { etiqueta: 'Mesa 2', titulo: 'Habilidades profesionales', sala: 'Sala por definir', ancla: '#mesa-2', hora: '14:30 – 15:50' },
+        { etiqueta: 'Mesa 3', titulo: 'Evaluar para la diversidad', sala: 'Sala por definir', ancla: '#mesa-3', hora: '14:30 – 15:50' },
+        { etiqueta: 'Mesa 4', titulo: 'Inserción y apoyo académico', sala: 'Sala por definir', ancla: '#mesa-4', hora: '16:00 – 17:20' },
+        { etiqueta: 'Mesa 5', titulo: 'Evaluación para el aprendizaje', sala: 'Sala por definir', ancla: '#mesa-5', hora: '16:00 – 17:20' },
+        { etiqueta: 'Mesa 6', titulo: 'Consideraciones inclusivas para la práctica docente', sala: 'Sala por definir', ancla: '#mesa-6', hora: '16:00 – 17:20' }
       ]
     },
     '2026-12-17': {
@@ -42,15 +42,15 @@
       conferencia: {
         hora: '13:10 – 14:30',
         titulo: 'Presentación del libro: Buenas Prácticas en la Formación de Pregrado UDP',
-        persona: 'Almuerzo opcional'
+        persona: 'Contempla almuerzo'
       },
       mesas: [
-        { etiqueta: 'Mesa 7', titulo: 'Experiencias de interdisciplina', sala: 'Vértice/CREA', ancla: '#mesa-7', hora: '10:00 – 11:20' },
-        { etiqueta: 'Mesa 8', titulo: 'Investigación, creación e innovación', sala: 'Vértice/CREA', ancla: '#mesa-8', hora: '10:00 – 11:20' },
-        { etiqueta: 'Mesa 9', titulo: 'Formar para la inclusión', sala: 'Vértice/CREA', ancla: '#mesa-9', hora: '10:00 – 11:20' },
-        { etiqueta: 'Mesa 10', titulo: 'Gestión curricular y Desarrollo docente', sala: 'Vértice/CREA', ancla: '#mesa-10', hora: '11:30 – 12:50' },
-        { etiqueta: 'Mesa 11', titulo: 'Internacionalización y Vinculación con el medio', sala: 'Vértice/CREA', ancla: '#mesa-11', hora: '11:30 – 12:50' },
-        { etiqueta: 'Mesa 12', titulo: 'Planes de estudio e inclusión', sala: 'Vértice/CREA', ancla: '#mesa-12', hora: '11:30 – 12:50' }
+        { etiqueta: 'Mesa 7', titulo: 'Experiencias de interdisciplina', sala: 'Sala por definir', ancla: '#mesa-7', hora: '10:00 – 11:20' },
+        { etiqueta: 'Mesa 8', titulo: 'Investigación, creación e innovación', sala: 'Sala por definir', ancla: '#mesa-8', hora: '10:00 – 11:20' },
+        { etiqueta: 'Mesa 9', titulo: 'Formar para la inclusión', sala: 'Sala por definir', ancla: '#mesa-9', hora: '10:00 – 11:20' },
+        { etiqueta: 'Mesa 10', titulo: 'Gestión curricular y Desarrollo docente', sala: 'Sala por definir', ancla: '#mesa-10', hora: '11:30 – 12:50' },
+        { etiqueta: 'Mesa 11', titulo: 'Internacionalización y Vinculación con el medio', sala: 'Sala por definir', ancla: '#mesa-11', hora: '11:30 – 12:50' },
+        { etiqueta: 'Mesa 12', titulo: 'Planes de estudio e inclusión', sala: 'Sala por definir', ancla: '#mesa-12', hora: '11:30 – 12:50' }
       ]
     }
   };
@@ -150,6 +150,7 @@
       mesasHTML = '<p class="panel-subtitulo">Mesas de trabajo (requieren inscripción)</p><ul class="panel-lista">' + mesasHTML + '</ul>';
     }
 
+    // Actualizado para apuntar siempre al formulario
     const btnInscripcion = j.mesas.length > 0 
       ? '<a class="btn btn-primario" href="' + FORM_URL + '" target="_blank" rel="noopener">Inscríbete en las mesas</a>' 
       : '';
@@ -222,7 +223,8 @@
     const link = e.target.closest('a');
     if (!link) return;
 
-    if (link.dataset.vista) {
+    // Comprobar si tiene data-vista Y no es un botón de inscripción
+    if (link.dataset.vista && !link.classList.contains('btn')) {
       e.preventDefault();
       const id = link.dataset.vista;
       history.pushState({ vista: id }, '', '#' + id);
