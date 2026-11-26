@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  const FORM_URL = 'https://forms.gle/2w7oSmajrmrYeEZZ7';
+  const FORM_URL = 'https://forms.gle/nt7oTcX3CLDruh5g8';
 
   const MESES = [
     'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
