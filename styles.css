@@ -71,7 +71,6 @@ img { max-width: 100%; display: block; }
   border-bottom: 1px solid var(--borde);
 }
 
-/* Ajustes del header para que quepa todo correctamente */
 .header-inner {
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem; flex-wrap: wrap; padding-block: 0.75rem;
