@@ -1,7 +1,6 @@
 /* =========================================================
-   Encuentro de Buenas Prácticas · Formación de Pregrado · UDP
-   Navegación por vistas, calendario interactivo, pestañas
-   y descarga de archivo .ics
+   Jornada de Buenas Prácticas · Inclusión Educativa · UDP
+   Navegación por vistas, calendario interactivo y pestañas
    ========================================================= */
 
 (function () {
@@ -10,7 +9,7 @@
   /* ---------------------------------------------------------
      >> ÚNICO LUGAR QUE DEBES EDITAR PARA EL FORMULARIO <<
      --------------------------------------------------------- */
-  const FORM_URL = 'https://forms.gle/xxxxxxxxxxxxxxxx';
+  const FORM_URL = 'https://forms.gle/2w7oSmajrmrYeEZZ7';
 
   /* ---------- Datos de las jornadas ---------- */
   const MESES = [
@@ -19,70 +18,56 @@
   ];
 
   const JORNADAS = {
+    '2026-12-08': {
+      fechaCorta: '8 de diciembre de 2026',
+      fechaLarga: 'Martes 8 de diciembre de 2026',
+      etiqueta: 'Jornada 1 · Tarde',
+      titulo: 'Enseñar y evaluar para la diversidad',
+      horario: '14:00 – 18:00',
+      conferencia: {
+        hora: '14:30 – 15:00',
+        titulo: 'Docencia universitaria inclusiva',
+        persona: 'Pablo Rodríguez · UAM (online)'
+      },
+      mesas: [
+        {
+          etiqueta: 'Mesa 1',
+          titulo: 'Enseñar y evaluar para la diversidad',
+          sala: 'Vértice cerrado',
+          ancla: '#mesa-1'
+        },
+        {
+          etiqueta: 'Mesa 2',
+          titulo: 'Formar para la inclusión',
+          sala: 'CREA',
+          ancla: '#mesa-2'
+        }
+      ]
+    },
     '2026-12-09': {
       fechaCorta: '9 de diciembre de 2026',
       fechaLarga: 'Miércoles 9 de diciembre de 2026',
-      etiqueta: 'Jornada 1 · Conferencia',
-      titulo: 'Charla: Docencia inclusiva',
-      horario: '14:30 – 15:50',
+      etiqueta: 'Jornada 2 · Mañana',
+      titulo: 'Repensar los planes de estudio y diseñar asignaturas inclusivas',
+      horario: '09:00 – 13:00',
       conferencia: {
-        hora: '14:30 – 15:50',
-        titulo: 'Docencia inclusiva',
-        persona: 'Pablo Rodríguez · UAM (Zoom)'
-      },
-      mesas: [] // Sin mesas este día
-    },
-    '2026-12-10': {
-      fechaCorta: '10 de diciembre de 2026',
-      fechaLarga: 'Jueves 10 de diciembre de 2026',
-      etiqueta: 'Jornada 2 · Conversatorio',
-      titulo: 'Conversatorio: Diseño formativo inclusivo',
-      horario: '09:30 – 11:00',
-      conferencia: {
-        hora: '09:30 – 11:00',
-        titulo: 'Diseño formativo inclusivo',
-        persona: 'Cristina Petreñas y Clara Sansó · UdL (Zoom)'
-      },
-      mesas: [] // Sin mesas este día
-    },
-    '2026-12-16': {
-      fechaCorta: '16 de diciembre de 2026',
-      fechaLarga: 'Miércoles 16 de diciembre de 2026',
-      etiqueta: 'Jornada 3 · Mesas',
-      titulo: 'Presentación de experiencias y mesas 1 a 6',
-      horario: '09:30 – 17:20',
-      conferencia: {
-        hora: '09:30 – 11:20',
-        titulo: 'Inauguración y presentación de experiencias: Docencia en primera persona',
-        persona: 'Docentes destacados UDP'
+        hora: '09:20 – 10:00',
+        titulo: 'Orientaciones para la incorporación del enfoque inclusivo en planes de estudio, programas de asignaturas y actividades pedagógicas',
+        persona: 'Cristina Petreñas y Clara Sansó · UdL (online)'
       },
       mesas: [
-        { etiqueta: 'Mesa 1', titulo: 'Metodologías activas y Tecnologías emergentes', sala: 'Por confirmar', ancla: '#mesa-1', hora: '14:30 – 15:50' },
-        { etiqueta: 'Mesa 2', titulo: 'Habilidades profesionales', sala: 'Por confirmar', ancla: '#mesa-2', hora: '14:30 – 15:50' },
-        { etiqueta: 'Mesa 3', titulo: 'Evaluar para la diversidad', sala: 'Por confirmar', ancla: '#mesa-3', hora: '14:30 – 15:50' },
-        { etiqueta: 'Mesa 4', titulo: 'Inserción y apoyo académico', sala: 'Por confirmar', ancla: '#mesa-4', hora: '16:00 – 17:20' },
-        { etiqueta: 'Mesa 5', titulo: 'Evaluación para el aprendizaje', sala: 'Por confirmar', ancla: '#mesa-5', hora: '16:00 – 17:20' },
-        { etiqueta: 'Mesa 6', titulo: 'Consideraciones inclusivas para la práctica docente', sala: 'Por confirmar', ancla: '#mesa-6', hora: '16:00 – 17:20' }
-      ]
-    },
-    '2026-12-17': {
-      fechaCorta: '17 de diciembre de 2026',
-      fechaLarga: 'Jueves 17 de diciembre de 2026',
-      etiqueta: 'Jornada 4 · Mesas',
-      titulo: 'Mesas 7 a 12 y presentación del libro',
-      horario: '10:00 – 14:30',
-      conferencia: {
-        hora: '13:10 – 14:30',
-        titulo: 'Presentación del libro: Buenas Prácticas en la Formación de Pregrado UDP',
-        persona: 'Almuerzo opcional'
-      },
-      mesas: [
-        { etiqueta: 'Mesa 7', titulo: 'Experiencias de interdisciplina', sala: 'Por confirmar', ancla: '#mesa-7', hora: '10:00 – 11:20' },
-        { etiqueta: 'Mesa 8', titulo: 'Investigación, creación e innovación en la formación', sala: 'Por confirmar', ancla: '#mesa-8', hora: '10:00 – 11:20' },
-        { etiqueta: 'Mesa 9', titulo: 'Formar para la inclusión', sala: 'Por confirmar', ancla: '#mesa-9', hora: '10:00 – 11:20' },
-        { etiqueta: 'Mesa 10', titulo: 'Gestión curricular y Desarrollo docente', sala: 'Por confirmar', ancla: '#mesa-10', hora: '11:30 – 12:50' },
-        { etiqueta: 'Mesa 11', titulo: 'Internacionalización y Vinculación con el medio', sala: 'Por confirmar', ancla: '#mesa-11', hora: '11:30 – 12:50' },
-        { etiqueta: 'Mesa 12', titulo: 'Planes de estudio e inclusión', sala: 'Por confirmar', ancla: '#mesa-12', hora: '11:30 – 12:50' }
+        {
+          etiqueta: 'Mesa 3',
+          titulo: 'Repensar los planes de estudio',
+          sala: 'Vértice cerrado',
+          ancla: '#mesa-3'
+        },
+        {
+          etiqueta: 'Mesa 4',
+          titulo: 'Diseñar asignaturas inclusivas',
+          sala: 'CREA',
+          ancla: '#mesa-4'
+        }
       ]
     }
   };
@@ -113,7 +98,7 @@
     elTitulo.textContent = capitalizar(MESES[mes - 1]) + ' ' + anio;
 
     const primerDia = new Date(anio, mes - 1, 1);
-    const offset = (primerDia.getDay() + 6) % 7;
+    const offset = (primerDia.getDay() + 6) % 7; // lunes = 0
     const totalDias = new Date(anio, mes, 0).getDate();
 
     elGrid.innerHTML = '';
@@ -183,7 +168,7 @@
       elPanel.innerHTML =
         '<p class="panel-etiqueta">Detalle del día</p>' +
         '<h3>Selecciona una fecha destacada</h3>' +
-        '<p>Los días marcados en azul corresponden a las jornadas del encuentro. ' +
+        '<p>Los días marcados en azul corresponden a las dos jornadas. ' +
         'Al seleccionarlos verás la conferencia principal, las mesas de trabajo ' +
         'y los espacios asignados.</p>';
       return;
@@ -191,14 +176,10 @@
 
     const j = JORNADAS[k];
 
-    let mesasHTML = '';
-    if (j.mesas.length > 0) {
-      mesasHTML = j.mesas.map(function (m) {
-        return '<li><a href="' + m.ancla + '">' + m.etiqueta + '. ' + m.titulo +
-               '</a> — ' + m.hora + '</li>';
-      }).join('');
-      mesasHTML = '<p class="panel-subtitulo">Mesas de trabajo</p><ul class="panel-lista">' + mesasHTML + '</ul>';
-    }
+    const mesasHTML = j.mesas.map(function (m) {
+      return '<li><a href="' + m.ancla + '">' + m.etiqueta + '. ' + m.titulo +
+             '</a> — ' + m.sala + '</li>';
+    }).join('');
 
     elPanel.innerHTML =
       '<p class="panel-etiqueta">' + j.etiqueta + '</p>' +
@@ -207,14 +188,15 @@
       '<p><strong>Horario:</strong> ' + j.horario + '</p>' +
 
       '<div class="panel-destacado">' +
-        '<p class="panel-subtitulo">Actividad principal · ' + j.conferencia.hora + '</p>' +
+        '<p class="panel-subtitulo">Conferencia · ' + j.conferencia.hora + '</p>' +
         '<p><strong>' + j.conferencia.titulo + '</strong></p>' +
         '<p>' + j.conferencia.persona + '</p>' +
       '</div>' +
 
-      mesasHTML +
+      '<p class="panel-subtitulo">Mesas de trabajo</p>' +
+      '<ul class="panel-lista">' + mesasHTML + '</ul>' +
 
-      '<a class="btn btn-primario" href="' + FORM_URL + '" target="_blank" rel="noopener">Inscríbete en las mesas</a>';
+      '<a class="btn btn-primario" href="' + FORM_URL + '" target="_blank" rel="noopener">Inscríbete aquí</a>';
   }
 
   /* ---------- Navegación de meses ---------- */
@@ -277,7 +259,8 @@
   const navLinks = document.querySelectorAll('a[data-vista]');
   const vistas = document.querySelectorAll('.vista');
 
-  function mostrarVista(id, scrollToId) {
+  function mostrarVista(id, scrollToId = null) {
+    // Mostrar/ocultar
     vistas.forEach(function (v) {
       if (v.id === 'vista-' + id) {
         v.hidden = false;
@@ -286,6 +269,7 @@
       }
     });
 
+    // Actualizar aria-current
     navLinks.forEach(function (link) {
       if (link.dataset.vista === id) {
         link.setAttribute('aria-current', 'page');
@@ -294,6 +278,7 @@
       }
     });
 
+    // Foco y scroll
     if (scrollToId) {
       const el = document.getElementById(scrollToId);
       if (el) {
@@ -314,10 +299,12 @@
     }
   }
 
+  // Clics en enlaces
   document.addEventListener('click', function (e) {
     const link = e.target.closest('a');
     if (!link) return;
 
+    // Cambio de vista principal
     if (link.dataset.vista) {
       e.preventDefault();
       const id = link.dataset.vista;
@@ -326,6 +313,7 @@
       return;
     }
 
+    // Enlaces a mesas específicas
     const href = link.getAttribute('href');
     if (href && href.startsWith('#mesa-')) {
       e.preventDefault();
@@ -335,6 +323,7 @@
     }
   });
 
+  // Navegación hacia atrás/adelante
   window.addEventListener('popstate', function (e) {
     const state = e.state;
     if (state && state.vista) {
@@ -347,84 +336,28 @@
     }
   });
 
-  /* ---------- Generar archivo .ICS para guardar en calendario ---------- */
-  const btnICS = document.getElementById('btnDescargarICS');
-
-  if (btnICS) {
-    btnICS.addEventListener('click', function() {
-      const eventos = [
-        {
-          inicio: '20261209T143000',
-          fin: '20261209T155000',
-          titulo: 'Charla: Docencia inclusiva (Pablo Rodríguez - UAM)',
-          descripcion: 'Encuentro de Buenas Prácticas en la Formación de Pregrado UDP. Actividad vía Zoom.',
-          lugar: 'Vía Zoom'
-        },
-        {
-          inicio: '20261210T093000',
-          fin: '20261210T110000',
-          titulo: 'Conversatorio: Diseño formativo inclusivo (Cristina Petreñas y Clara Sansó - UdL)',
-          descripcion: 'Encuentro de Buenas Prácticas en la Formación de Pregrado UDP. Actividad vía Zoom.',
-          lugar: 'Vía Zoom'
-        },
-        {
-          inicio: '20261216T093000',
-          fin: '20261216T172000',
-          titulo: 'Inauguración, presentación de experiencias y Mesas 1-6',
-          descripcion: 'Encuentro de Buenas Prácticas en la Formación de Pregrado UDP.',
-          lugar: 'Vértice y Sala CREA, UDP'
-        },
-        {
-          inicio: '20261217T100000',
-          fin: '20261217T143000',
-          titulo: 'Mesas 7-12 y Presentación del libro',
-          descripcion: 'Encuentro de Buenas Prácticas en la Formación de Pregrado UDP.',
-          lugar: 'Vértice y Sala CREA, UDP'
-        }
-      ];
-
-      let icsContent = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//UDP//Encuentro Buenas Practicas//ES',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH'
-      ];
-
-      eventos.forEach(function(ev) {
-        icsContent.push('BEGIN:VEVENT');
-        icsContent.push('UID:' + Date.now() + Math.random().toString(36).substring(2) + '@udp.cl');
-        icsContent.push('DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z');
-        icsContent.push('DTSTART:' + ev.inicio);
-        icsContent.push('DTEND:' + ev.fin);
-        icsContent.push('SUMMARY:' + ev.titulo);
-        icsContent.push('DESCRIPTION:' + ev.descripcion);
-        icsContent.push('LOCATION:' + ev.lugar);
-        icsContent.push('END:VEVENT');
-      });
-
-      icsContent.push('END:VCALENDAR');
-
-      const blob = new Blob([icsContent.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Encuentro_Buenas_Practicas_UDP.ics';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    });
-  }
-
   /* ---------- Inicialización ---------- */
   function init() {
     const hash = window.location.hash.replace('#', '');
     const vistasPosibles = ['inicio', 'calendario', 'programa', 'mesas', 'expositores', 'inscripcion'];
     const initialVista = vistasPosibles.includes(hash) ? hash : 'inicio';
 
+    // Configurar enlaces del formulario
     document.querySelectorAll('[data-form]').forEach(function (enlace) {
       enlace.href = FORM_URL;
+    });
+
+    // Actualizar fechas dinámicas
+    const MAPA_FECHAS = { j1: '2026-12-08', j2: '2026-12-09' };
+
+    document.querySelectorAll('[data-fecha]').forEach(function (el) {
+      const k = MAPA_FECHAS[el.getAttribute('data-fecha')];
+      if (k && JORNADAS[k]) el.textContent = JORNADAS[k].fechaCorta;
+    });
+
+    document.querySelectorAll('[data-fecha-larga]').forEach(function (el) {
+      const k = MAPA_FECHAS[el.getAttribute('data-fecha-larga')];
+      if (k && JORNADAS[k]) el.textContent = JORNADAS[k].fechaLarga;
     });
 
     renderCalendario();
